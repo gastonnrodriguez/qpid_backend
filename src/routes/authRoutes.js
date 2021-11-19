@@ -11,5 +11,5 @@ router.post("/registro", registro);
 router.post("/login", login);
 
 router.get("/usuarios", getUsers);
-
+//router.get("/usuarios",verifyToken, getUsers);
 module.exports = router;
