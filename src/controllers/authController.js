@@ -27,12 +27,19 @@ const registro = async (req, res, next) => {
 
       const newUser = {
         name: req.body.name,
+        age: req.body.age,
+        gender: req.body.gender,
+        lookingFor: req.body.lookingFor,
+        bio: req.body.bio,
+        image: req.body.image,
+        distance: req.body.image,
+        interests: req.body.interests,
         mail: req.body.mail,
         password: password,
       };
 
       usuarios.push(newUser);
-
+      console.log(`NEW USER ${newUser.name}`);
       return res.status(200).json({ success: true, newUser });
     } else {
       return res.status(400).json({
@@ -74,6 +81,7 @@ const login = async (req, res, next) => {
       error: null,
       data: "Login exitoso",
       token,
+      user,
     });
   } catch (error) {
     return next(error);
@@ -97,7 +105,7 @@ module.exports = {
 const usuarios = [
   {
     id: "c1a718e1-01bd-4739-9142-a02af21868c1",
-    email: "psidworth0@npr.org",
+    mail: "psidworth0@npr.org",
     name: "Pauli",
     age: 32,
     gender: "Male",
@@ -107,10 +115,11 @@ const usuarios = [
       "https://robohash.org/molestiaealiquidquas.png?size=250x350&set=set1",
     distance: 9,
     interests: ["Karaoke", "Moda", "Brunch", "Escritura", "Nadar"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "34d1be2a-88a6-4554-a887-7b752ab3df77",
-    email: "ntredgold1@squarespace.com",
+    mail: "ntredgold1@squarespace.com",
     name: "Noella",
     age: 48,
     gender: "Female",
@@ -119,10 +128,11 @@ const usuarios = [
     image: "https://robohash.org/molestiaeenimaut.png?size=250x350&set=set1",
     distance: 7,
     interests: ["Deportes", "Caminar", "Politica", "Golf"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "a4c3075b-48d4-4c98-96b1-4f970c8eeb48",
-    email: "jmacieja2@hostgator.com",
+    mail: "jmacieja2@hostgator.com",
     name: "Junia",
     age: 28,
     gender: "Male",
@@ -131,10 +141,11 @@ const usuarios = [
     image: "https://robohash.org/suntevenietqui.png?size=250x350&set=set1",
     distance: 3,
     interests: ["Moda", "Correr", "Voluntariado", "Te"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "90f430b1-91d4-429e-9dbb-2293217dbf5d",
-    email: "ksomner3@purevolume.com",
+    mail: "ksomner3@purevolume.com",
     name: "Kaitlin",
     age: 28,
     gender: "Male",
@@ -143,10 +154,11 @@ const usuarios = [
     image: "https://robohash.org/autemsequiqui.png?size=250x350&set=set1",
     distance: 8,
     interests: ["Escalada", "Entrenamiento", "Vino", "Amante de los perros"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "8839cdaa-12a3-4b09-93f3-74302eebb09b",
-    email: "hbaudesson4@elegantthemes.com",
+    mail: "hbaudesson4@elegantthemes.com",
     name: "Harlin",
     age: 41,
     gender: "Female",
@@ -155,10 +167,11 @@ const usuarios = [
     image: "https://robohash.org/liberoquiesse.png?size=250x350&set=set1",
     distance: 9,
     interests: ["Leer", "Trivia"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "8c94cdaa-1f0d-4092-a7d9-bec3d19433c9",
-    email: "dmaides5@blogs.com",
+    mail: "dmaides5@blogs.com",
     name: "Dorthea",
     age: 38,
     gender: "Female",
@@ -167,10 +180,11 @@ const usuarios = [
     image: "https://robohash.org/etnostrumipsam.png?size=250x350&set=set1",
     distance: 1,
     interests: ["Dieta a base de plantas", "Musica", "Te", "Entrenamiento"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "f12ca4d8-5c36-4572-8c53-9b763981b9e4",
-    email: "mleppo6@elpais.com",
+    mail: "mleppo6@elpais.com",
     name: "Matty",
     age: 31,
     gender: "Male",
@@ -179,10 +193,11 @@ const usuarios = [
     image: "https://robohash.org/sedetvoluptatem.png?size=250x350&set=set1",
     distance: 10,
     interests: ["Yoga", "Trivia", "Politica"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "72647e69-6d92-472e-8666-09e2bb79f3e1",
-    email: "vbrute7@baidu.com",
+    mail: "vbrute7@baidu.com",
     name: "Venita",
     age: 31,
     gender: "Male",
@@ -192,10 +207,11 @@ const usuarios = [
       "https://robohash.org/fugiatillotemporibus.png?size=250x350&set=set1",
     distance: 10,
     interests: ["Correr", "Yoga", "Bailar", "Intercambio de idiomas"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "7c39019f-ed29-4b36-aad8-560bed810a58",
-    email: "cmccuish8@redcross.org",
+    mail: "cmccuish8@redcross.org",
     name: "Con",
     age: 28,
     gender: "Female",
@@ -204,10 +220,11 @@ const usuarios = [
     image: "https://robohash.org/doloresquiaquod.png?size=250x350&set=set1",
     distance: 5,
     interests: ["Caminar", "Viajar", "Yoga"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
   {
     id: "b6f949d1-953a-42ac-9f06-7a7a91d35128",
-    email: "oburgis9@amazonaws.com",
+    mail: "oburgis9@amazonaws.com",
     name: "Ottilie",
     age: 23,
     gender: "Male",
@@ -216,5 +233,6 @@ const usuarios = [
     image: "https://robohash.org/eaoditvitae.png?size=250x350&set=set1",
     distance: 5,
     interests: ["Futbol", "Astrologia", "Golf"],
+    password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   },
 ];

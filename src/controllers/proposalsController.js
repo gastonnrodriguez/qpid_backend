@@ -49,7 +49,8 @@ const findProposals = async id => {
 
   availableUsers.forEach(available => {
     compareInterests(user.interests, available.interests) &&
-    user.gender == available.lookingFor
+    user.gender == available.lookingFor &&
+    available.distance <= user.distance
       ? proposals.push(available)
       : availableUsers.pop(available);
   });

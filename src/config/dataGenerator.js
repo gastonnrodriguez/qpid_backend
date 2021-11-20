@@ -57,7 +57,8 @@ tags = [
     "Yoga",
     "Pesca",
   ];
-  
+  /*
+  //Generate random selection of tags
   const randomNumber = (a, b) => {
     return Math.floor(Math.random() * b) + a;
   };
@@ -78,4 +79,13 @@ tags = [
     console.log(selectedTags);
     selectedTags = [];
   }
-  
+  */
+//Generate checkbox for interests dynamically
+  tags.forEach(tag => {
+   console.log(`
+  <div class="tag">
+    <input type="checkbox" id="${tag}" name="${tag}" value="${tag}" class="interestTag">
+    <label for="${tag}">${tag}</label>
+  <div/>
+  `);
+  });
