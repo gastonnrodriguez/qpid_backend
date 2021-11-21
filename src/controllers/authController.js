@@ -26,13 +26,14 @@ const registro = async (req, res, next) => {
       const password = await bcrypt.hash(req.body.password, salt);
 
       const newUser = {
+        id: idMaker(24),
         name: req.body.name,
         age: req.body.age,
         gender: req.body.gender,
         lookingFor: req.body.lookingFor,
         bio: req.body.bio,
         image: req.body.image,
-        distance: req.body.image,
+        distance: req.body.distance,
         interests: req.body.interests,
         mail: req.body.mail,
         password: password,
@@ -76,7 +77,7 @@ const login = async (req, res, next) => {
       TOKEN_SECRET
     );
 
-    console.log("Login exitoso");
+    console.log(`LOGIN OK USUARIO ${user.name} TOKEN ${token}`);
     res.status(200).json({
       error: null,
       data: "Login exitoso",
@@ -95,6 +96,19 @@ const getUsers = async (req, res, next) => {
     return next(error);
   }
 };
+
+const idMaker = length => {
+  let result           = '';
+  let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( let i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+
+
 
 module.exports = {
   registro,
