@@ -2,9 +2,9 @@
 ## How to install:
 Clone the repository and run npm install, you'll need Node, Express, Nodemon, Morgan among others packages.
 
-##Endpoints
+## Endpoints
 
-###/registro
+### /registro
 Allows you to register a new user:
 E.g. : Request POST 
 {    
@@ -36,7 +36,7 @@ E.g. : Request POST
     password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",
   }
 
-###/login 
+### /login 
 Let users log in into the app
 E.g.: Request POST
 {  
@@ -60,7 +60,7 @@ Response 200 OK
     password: "$2b$10$EE3eIPWLB3rQWlP7FPK60OhDovkg1FkgWFook3wWHZoIMzvMnW62i",},
 token: "dfjalsñdjfñdjf879698730982-304982-34h"
 }
-###/getUsers
+### /getUsers
 Returns a complete list of users
 E.g: Request GET
 
