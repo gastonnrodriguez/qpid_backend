@@ -67,7 +67,7 @@ E.g: Request GET
 Response 200 OK
 with an array of users.
 
-###/getProposals
+### /getProposals
 Returns proposals for the signed in user
 E.g: Request POST
 {
