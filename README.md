@@ -4,7 +4,7 @@ Clone the repository and run npm install, you'll need Node, Express, Nodemon, Mo
 
 ## Endpoints
 
-### /registro
+### /register
 Allows you to register a new user:
 E.g. : Request POST 
 {    
