@@ -4,9 +4,9 @@ const url = "http://localhost:3000/";
 //Return all users from database
 
 const allUsers = async () => {
-  try {
-    const response = await axios(`${url}auth/usuarios`);
-    return response.data.usuarios;
+  try {//TODO add header with auth-token
+    const response = await axios(`${url}auth/users`);
+    return response.data.users;
   } catch (error) {
     console.log(error);
   }

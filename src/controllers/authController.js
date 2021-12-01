@@ -1,28 +1,29 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { TOKEN_SECRET } = require("../middleware/jwt-validate");
-const registro = async (req, res, next) => {
+
+const register = async (req, res, next) => {
   try {
     if (req.body.mail && req.body.name && req.body.password) {
-      // Formato del mail
       if (/^\S+@\S+\.\S+$/.test(req.body.mail) === false) {
         res
           .status(400)
-          .json({ success: false, message: "Formato de mail incorrecto" });
+          .json({ success: false, message: "Incorrect mail format" });
         return;
       }
 
-      const existeUser = usuarios.find(u => {
+      const userExists = users.find(u => {
         return u.mail === req.body.mail;
       });
 
-      if (existeUser) {
-        res.status(400).json({ success: false, message: "Mail repetido" });
+      if (userExists) {
+        res
+          .status(400)
+          .json({ success: false, message: "repeated email address" });
         return;
       }
 
       const salt = await bcrypt.genSalt(10);
-      console.log("Salt", salt);
       const password = await bcrypt.hash(req.body.password, salt);
 
       const newUser = {
@@ -39,13 +40,12 @@ const registro = async (req, res, next) => {
         password: password,
       };
 
-      usuarios.push(newUser);
-      console.log(`NEW USER ${newUser.name}`);
+      users.push(newUser);
       return res.status(200).json({ success: true, newUser });
     } else {
       return res.status(400).json({
         success: false,
-        message: "Faltan datos (requeridos: mail, name, password)",
+        message: "Missing values (required: mail, name, password)",
       });
     }
   } catch (error) {
@@ -55,9 +55,9 @@ const registro = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const user = usuarios.find(u => u.mail === req.body.mail);
+    const user = users.find(u => u.mail === req.body.mail);
     if (!user) {
-      return res.status(400).json({ error: "Usuario no encontrado" });
+      return res.status(400).json({ error: "User not found" });
     }
 
     const validPassword = await bcrypt.compare(
@@ -65,7 +65,7 @@ const login = async (req, res, next) => {
       user.password
     );
     if (!validPassword) {
-      return res.status(400).json({ error: "Contraseña no válida" });
+      return res.status(400).json({ error: "Invalid password" });
     }
 
     // Crear el token
@@ -77,10 +77,9 @@ const login = async (req, res, next) => {
       TOKEN_SECRET
     );
 
-    console.log(`LOGIN OK USUARIO ${user.name} TOKEN ${token}`);
     res.status(200).json({
       error: null,
-      data: "Login exitoso",
+      data: "Login successful",
       token,
       user,
     });
@@ -91,32 +90,44 @@ const login = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    return res.json({ error: null, usuarios });
+    return res.status(200).json({ error: null, users });
   } catch (error) {
     return next(error);
   }
 };
 
 const idMaker = length => {
-  let result           = '';
-  let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = "";
+  let characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
-  for ( let i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(Math.random() * 
-charactersLength));
- }
- return result;
-}
-
-
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
 
 module.exports = {
-  registro,
+  register,
   login,
   getUsers,
 };
 
-const usuarios = [
+const users = [
+  {
+    id: "uCLrgIQwShMeqGPzssRCrxIR",
+    name: "Gaston",
+    age: 35,
+    gender: "Male",
+    lookingFor: "Female",
+    bio: "Pelican, brown",
+    image:
+      "https://rootencial.com/wp-content/uploads/2019/11/NOELLA-PINTEREST2-e1606715848364.jpg",
+    distance: 7,
+    interests: ["Moda", "Caminar", "Entrenamiento", "Yoga"],
+    mail: "gastoncodes@gmail.com",
+    password: "$2b$10$4Sk0vWidgLLvg.YV1Gc9heqHwCzgGPrJ2JiznmFV2bZQfytKW46Su",
+  },
   {
     id: "c1a718e1-01bd-4739-9142-a02af21868c1",
     mail: "psidworth0@npr.org",

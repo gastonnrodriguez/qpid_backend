@@ -6,7 +6,7 @@ const TOKEN_SECRET = "SpeakFriendAndEnter";
 const verifyToken = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) {
-    return res.status(401).json({ error: "Acceso denegado" });
+    return res.status(401).json({ error: "Access denied" });
   }
 
   try {
@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
     req.user = verified;
     next();
   } catch (error) {
-    res.status(400).json({ error: "El Token no es válido" });
+    res.status(400).json({ error: "Invalid token" });
   }
 };
 

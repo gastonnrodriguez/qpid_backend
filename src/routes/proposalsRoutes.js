@@ -7,7 +7,7 @@ const { getProposals } = require("../controllers/proposalsController");
 
 
 
-router.post("/", getProposals);
+router.post("/", verifyToken ,getProposals);
 module.exports = {
   router,
 };
