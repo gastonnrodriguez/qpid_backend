@@ -7,10 +7,11 @@ const User = require("../models/User");
 const allUsers = async (req, res, next) => {
   try {
     //TODO add header with auth-token
+    //const token = req.header['auth-token']
     const response = await axios(
       `${url}auth/users` /*, {
       headers:{
-        "auth-token" : req.headers
+        "auth-token" : token
       }
     }*/
     );

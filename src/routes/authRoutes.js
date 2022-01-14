@@ -10,6 +10,6 @@ router.post("/register", register);
 
 router.post("/login", login);
 
-router.get("/users",/* verifyToken ,*/getUsers);
+router.get("/users", /*verifyToken ,*/getUsers);
 
 module.exports = router;
