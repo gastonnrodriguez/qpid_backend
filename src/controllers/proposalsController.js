@@ -1,11 +1,19 @@
 const axios = require("axios");
 const url = "http://localhost:3000/";
+const User = require("../models/User");
 
 //Return all users from database
 
-const allUsers = async () => {
-  try {//TODO add header with auth-token
-    const response = await axios(`${url}auth/users`);
+const allUsers = async (req, res, next) => {
+  try {
+    //TODO add header with auth-token
+    const response = await axios(
+      `${url}auth/users` /*, {
+      headers:{
+        "auth-token" : req.headers
+      }
+    }*/
+    );
     return response.data.users;
   } catch (error) {
     console.log(error);
@@ -27,8 +35,7 @@ const filteredUsers = async id => {
 //Return the whole object of signed in user
 const loggedUser = async id => {
   try {
-    const users = await allUsers();
-    const loggedUser = users.find(user => user.id === id);
+    const loggedUser = User.findById(id);
     return loggedUser;
   } catch (error) {
     console.log(error);
@@ -47,7 +54,7 @@ const findProposals = async id => {
   const availableUsers = await filteredUsers(id);
   const proposals = [];
 
-  availableUsers.forEach(available => {
+  availableUsers.map(available => {
     compareInterests(user.interests, available.interests) &&
     user.gender == available.lookingFor &&
     available.distance <= user.distance
