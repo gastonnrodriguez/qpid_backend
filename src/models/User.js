@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        required: [true, 'Please identify yoourself']
+        required: [true, 'Please identify yourself']
     },
     lookingFor: {
         type: String,

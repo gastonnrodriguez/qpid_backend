@@ -6,15 +6,7 @@ const User = require("../models/User");
 
 const allUsers = async (req, res, next) => {
   try {
-    //TODO add header with auth-token
-    //const token = req.header['auth-token']
-    const response = await axios(
-      `${url}auth/users` /*, {
-      headers:{
-        "auth-token" : token
-      }
-    }*/
-    );
+    const response = await axios(`${url}auth/users`);
     return response.data.users;
   } catch (error) {
     console.log(error);
@@ -68,6 +60,7 @@ const findProposals = async id => {
 
 const getProposals = async (req, res, next) => {
   try {
+    
     const proposals = await findProposals(req.body.id);
     res.status(200).json({ status: "ok", proposals });
 
